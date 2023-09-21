@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import background from './assets/background.png';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {s} from "./App.style"
 //geolocation
 import { requestForegroundPermissionsAsync,getCurrentPositionAsync } from 'expo-location';
@@ -9,9 +10,20 @@ import { useEffect } from 'react';
 import {PolusiAPI} from './api/polusi';
 import { getAirQualityIndexes } from './api/hitungpolusi';
 import { Home } from './UIScreen/Home/Home';
+import { useFonts } from 'expo-font';
 
 
 export default function App() {
+
+  const [fontLoaded,fontError] = useFonts({
+    "Alata-Regular": require("./assets/Alata-Regular.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(() => {
+    if(fontLoaded){
+      console.log("Font Error");
+    }
+  }, [fontLoaded,fontError]);
 
   const [dataPolusi, setDataPolusi] = useState();
   const [coordinate, setCoordinate] = useState();
@@ -93,8 +105,9 @@ async function getUserCoordinates (){
 
   return (
     <>
+    <ImageBackground imageStyle={s.img} source={background} style={s.backgroundImage}>
     <SafeAreaProvider>
-    <SafeAreaView style={s.container}>
+    <SafeAreaView style={s.container} onLayout={onLayoutRootView}>
   
 
       <Home/>
@@ -103,6 +116,7 @@ async function getUserCoordinates (){
 
     </SafeAreaView>
     </SafeAreaProvider>
+    </ImageBackground>
     </>
   );
 }

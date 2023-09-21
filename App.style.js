@@ -5,8 +5,15 @@ export const s = StyleSheet.create({
     container:{
         flex: 1,
         padding: 20,
-        backgroundColor: "#f00",
     },
+    backgroundImage:{
+        flex: 1,
+    },
+
+    img :{
+        opacity: 1,
+    }
+    
     
     
 });

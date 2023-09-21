@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import {StyledContainer, s} from "./HomeFooter.style";
+import {StyledContainer, StyledLabel, StyledValue, s} from "./HomeFooter.style";
 
 
 export function HomeFooter(){
@@ -8,18 +8,18 @@ export function HomeFooter(){
         
         <View style = {s.container}>
           <StyledContainer>
-            <Text>Hello1A</Text>
-            <Text>Hello1B</Text>
+            <StyledLabel>123</StyledLabel>
+            <StyledValue>CO2</StyledValue>
           </StyledContainer>
 
           <StyledContainer>
-            <Text>Hello2A</Text>
-            <Text>Hello2B</Text>
+          <StyledLabel>234</StyledLabel>
+          <StyledValue>NO2</StyledValue>
           </StyledContainer>
 
           <StyledContainer>
-            <Text>Hello3A</Text>
-            <Text>Hello3B</Text>
+          <StyledLabel>456</StyledLabel>
+          <StyledValue>O2</StyledValue>
           </StyledContainer>
 
 
