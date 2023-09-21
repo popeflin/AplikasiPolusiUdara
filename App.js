@@ -11,8 +11,17 @@ import {PolusiAPI} from './api/polusi';
 import { getAirQualityIndexes } from './api/hitungpolusi';
 import { Home } from './UIScreen/Home/Home';
 import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { Detail } from './UIScreen/Detail/Detail';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 
+const navTheme ={
+  colors :{
+    background:"transparent"
+  }
+}
 export default function App() {
 
   const [fontLoaded,fontError] = useFonts({
@@ -104,20 +113,38 @@ async function getUserCoordinates (){
 
 
   return (
-    <>
+    <NavigationContainer theme={navTheme} >
     <ImageBackground imageStyle={s.img} source={background} style={s.backgroundImage}>
     <SafeAreaProvider>
-    <SafeAreaView style={s.container} onLayout={onLayoutRootView}>
+    <SafeAreaView style={s.container} >
   
+    <Stack.Navigator screenOptions = {{
 
-      <Home/>
+      headerShown: false,
+    }} initialRouteName='Detail' >
+
+      
+      
+<Stack.Screen name="Detail" component={Detail}/>
+      
+      <Stack.Screen name="Home">
+        {() => (
+
+            <Home/>
+
+        )}
+        </Stack.Screen>
+      
+        
+      
     
   
+      </Stack.Navigator>
 
     </SafeAreaView>
     </SafeAreaProvider>
     </ImageBackground>
-    </>
+    </NavigationContainer>
   );
 }
 
