@@ -2,27 +2,17 @@ import { StyleSheet } from "react-native";
 
 
 export const s = StyleSheet.create({
-    container:{
-        
+    container: {
+        flex: 1,
         padding: 20,
-        backgroundColor: "#f00",
-    },
-    header: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
+        
       },
-      aqiDescription: {
-        fontSize: 14,
-        marginVertical: 2,
+      img_background: {
+        flex: 1,
+        backgroundColor: "black",
       },
-      section: {
-        marginVertical: 10,
+      img: {
+        opacity: 0.75,
       },
-      text: {
-        fontSize: 16,
-        marginVertical: 2,
-      },
-
     
 });

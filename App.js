@@ -1,16 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View,Alert, ImageBackground, } from 'react-native';
+import { Home } from "./UIScreen/Home/Home";
+
+import backgroundImg from "./assets/background.png";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import {useState} from "react";
+import {useState,useCallback } from "react";
 import {s} from "./App.style"
 //geolocation
 import { requestForegroundPermissionsAsync,getCurrentPositionAsync } from 'expo-location';
 import { useEffect } from 'react';
 import {PolusiAPI} from './api/polusi';
 import { getAirQualityIndexes } from './api/hitungpolusi';
+import { useFonts } from "expo-font";
+
 
 
 export default function App() {
+  const [fontsLoaded,fontError] = useFonts({
+    "Alata-Regular": require("./assets/fonts/Alata-Regular.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+     
+    }
+  }, [fontsLoaded, fontError]);
+
 
   const [dataPolusi, setDataPolusi] = useState();
   const [coordinate, setCoordinate] = useState();
@@ -96,19 +111,23 @@ function getDataPolusiDetail(){
 
   return (
     <>
+    <ImageBackground
+        imageStyle={s.img}
+        style={s.img_background}
+        source={backgroundImg}>
+     
     <SafeAreaProvider>
-    <SafeAreaView>
+    <SafeAreaView style={s.container} onLayout={onLayoutRootView} >
+      
+   
+    <Home/>
+      
   
-    <View style={s.container}>
-      <Text style={s.header}>Deskripsi Indeks Kualitas Udara (AQI)</Text>
-      <ScrollView>
-      {dataPolusi && getDataPolusiDetail()}
-      </ScrollView>
-    </View>
   
 
     </SafeAreaView>
     </SafeAreaProvider>
+     </ImageBackground>
     </>
   );
 }
