@@ -19,6 +19,11 @@ export class PolusiAPI {
 
    static async getNamaKota(coordinate){
 
+      return (
+        await axios.get("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+coordinate.latitude+"&lon="+coordinate.longitude)
+
+      ).data;
+
    }
 
 

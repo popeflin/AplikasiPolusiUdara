@@ -8,12 +8,14 @@ import { requestForegroundPermissionsAsync,getCurrentPositionAsync } from 'expo-
 import { useEffect } from 'react';
 import {PolusiAPI} from './api/polusi';
 import { getAirQualityIndexes } from './api/hitungpolusi';
+import { Home } from './UIScreen/Home/Home';
 
 
 export default function App() {
 
   const [dataPolusi, setDataPolusi] = useState();
   const [coordinate, setCoordinate] = useState();
+  const [cityName, setCityName] = useState();
 
   useEffect(() => {
     getUserCoordinates();
@@ -25,6 +27,7 @@ useEffect(() => {
 if(coordinate){
   console.log("fetching data polusi");
   fetchDataPolusi();
+  fetchLocationToCity()
 }else{
   return;
 }
@@ -64,9 +67,12 @@ async function getUserCoordinates (){
 
   setDataPolusi(dataQuality);
 
-  
+ }
 
-
+ async function fetchLocationToCity(){
+    const cityName = await PolusiAPI.getNamaKota(coordinate);
+    setCityName(cityName);
+    console.log(cityName);
  }
 
  const aqiDescription = [
@@ -80,16 +86,7 @@ async function getUserCoordinates (){
 
 
  
-function getDataPolusiDetail(){
-  console.log(dataPolusi);
-  return dataPolusi.map(({pollutant, value, index, label, range}, idx) => (
-    <View key={idx} style={s.section}>
-      <Text style={s.text}>{pollutant}: {value} µg/m³</Text>
-      <Text style={s.text}>{label} ({index}): {range[0]} - {range[1]}</Text>
-      <Text style={s.text}>Kesimpulan: Kualitas udara {label.toLowerCase()} untuk {pollutant}</Text>
-    </View>
-  ));
-}
+
 
 
 
@@ -97,14 +94,11 @@ function getDataPolusiDetail(){
   return (
     <>
     <SafeAreaProvider>
-    <SafeAreaView>
+    <SafeAreaView style={s.container}>
   
-    <View style={s.container}>
-      <Text style={s.header}>Deskripsi Indeks Kualitas Udara (AQI)</Text>
-      <ScrollView>
-      {dataPolusi && getDataPolusiDetail()}
-      </ScrollView>
-    </View>
+
+      <Home/>
+    
   
 
     </SafeAreaView>
