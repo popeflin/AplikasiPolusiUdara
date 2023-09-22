@@ -5,13 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-export function HomeHeader(){
+export function HomeHeader({dataPolusi, cityName}){
     const nav = useNavigation();
 
 return(
     <>
     <View>
-        <Txt>Bogor</Txt>
+        <Txt>{cityName.address.city}</Txt>
     </View>
 
     <View style = {s.textMiring}>

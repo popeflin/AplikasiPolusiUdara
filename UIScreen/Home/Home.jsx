@@ -5,14 +5,14 @@ import { s } from "./Home.style";
 
 
 
-export function Home({navigation}){
+export function Home({dataPolusi, cityName}){
 
 
     return (
     <>
 
       <View style = {s.homeheader}>
-      <HomeHeader/>
+      <HomeHeader dataPolusi = {dataPolusi} cityName = {cityName}/>
       </View>
 
       <View style = {s.homebody}>
@@ -23,7 +23,7 @@ export function Home({navigation}){
       </View>
     
       <View style = {s.homefooter}>
-      <HomeFooter/>
+      <HomeFooter  dataPolusi = {dataPolusi} cityName = {cityName} />
       </View>
     
     </>

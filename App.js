@@ -24,15 +24,11 @@ const navTheme ={
 }
 export default function App() {
 
-  const [fontLoaded,fontError] = useFonts({
-    "Alata-Regular": require("./assets/Alata-Regular.ttf"),
+  const [fontLoaded] = useFonts({
+    "Alata-Regular": require("./assets/fonts/Alata-Regular.ttf"),
   });
 
-  const onLayoutRootView = useCallback(() => {
-    if(fontLoaded){
-      console.log("Font Error");
-    }
-  }, [fontLoaded,fontError]);
+  
 
   const [dataPolusi, setDataPolusi] = useState();
   const [coordinate, setCoordinate] = useState();
@@ -93,7 +89,8 @@ async function getUserCoordinates (){
  async function fetchLocationToCity(){
     const cityName = await PolusiAPI.getNamaKota(coordinate);
     setCityName(cityName);
-    console.log(cityName);
+    console.log(cityName.address.city);
+    
  }
 
  const aqiDescription = [
@@ -117,7 +114,7 @@ async function getUserCoordinates (){
     <ImageBackground imageStyle={s.img} source={background} style={s.backgroundImage}>
     <SafeAreaProvider>
     <SafeAreaView style={s.container} >
-  
+  {  fontLoaded && coordinate && dataPolusi && cityName &&(
     <Stack.Navigator screenOptions = {{
 
       headerShown: false,
@@ -127,22 +124,22 @@ async function getUserCoordinates (){
       
 
       
-      {/* <Stack.Screen name="Home">
+      <Stack.Screen name="Home">
         {() => (
 
-            <Home/>
+            <Home dataPolusi = {dataPolusi} cityName = {cityName}/>
 
         )}
-        </Stack.Screen> */}
+        </Stack.Screen>
 
-        <Stack.Screen name="Home" component={Home}/>
+        
       
         <Stack.Screen name="Detail" component={Detail}/>
       
     
   
       </Stack.Navigator>
-
+)}
     </SafeAreaView>
     </SafeAreaProvider>
     </ImageBackground>
