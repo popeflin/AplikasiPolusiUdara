@@ -14,6 +14,7 @@ import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { Detail } from './UIScreen/Detail/Detail';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ImageScreen } from './UIScreen/ImageScreen/ImageScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -118,7 +119,7 @@ async function getUserCoordinates (){
     <Stack.Navigator screenOptions = {{
 
       headerShown: false,
-    }} initialRouteName='Home' >
+    }} initialRouteName='Camera' >
 
       
       
@@ -135,6 +136,7 @@ async function getUserCoordinates (){
         
       
         <Stack.Screen name="Detail" component={Detail}/>
+        <Stack.Screen name="Camera" component={ImageScreen}/>
       
     
   
