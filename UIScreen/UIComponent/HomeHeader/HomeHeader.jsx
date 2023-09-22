@@ -19,7 +19,7 @@ return(
     </View>
 
     <View style ={s.iconBox}>
-        <TouchableOpacity onPress={() => nav.navigate('Detail')}>
+        <TouchableOpacity onPress={() => nav.navigate('Detail',{"dataPolusi":dataPolusi, "cityName" :cityName})}>
         <Txt style={s.icon}>Icon</Txt>
         </TouchableOpacity>
     </View>
