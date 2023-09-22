@@ -121,21 +121,23 @@ async function getUserCoordinates (){
     <Stack.Navigator screenOptions = {{
 
       headerShown: false,
-    }} initialRouteName='Detail' >
+    }} initialRouteName='Home' >
 
       
       
-<Stack.Screen name="Detail" component={Detail}/>
+
       
-      <Stack.Screen name="Home">
+      {/* <Stack.Screen name="Home">
         {() => (
 
             <Home/>
 
         )}
-        </Stack.Screen>
+        </Stack.Screen> */}
+
+        <Stack.Screen name="Home" component={Home}/>
       
-        
+        <Stack.Screen name="Detail" component={Detail}/>
       
     
   
